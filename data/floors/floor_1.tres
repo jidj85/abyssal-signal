@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="FloorDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/floor_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+enemy_count_range = Vector2i(2, 3)
+enemy_pool = [&"lurker", &"drifter"]
+wall_density = 0.05
+has_health_pickup = false

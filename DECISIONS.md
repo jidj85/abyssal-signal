@@ -18,7 +18,7 @@ Project-level technical and design decisions with context. Per-change decisions 
 
 ---
 
-## 002 — Engine: Godot 4.x with GDScript (pending validation)
+## 002 — Engine: Godot 4.x with GDScript (confirmed)
 
 **Date:** 2026-03-28
 **Context:** Need a game engine for a 2D hex-grid turn-based roguelike. Developer is a generalist programmer with no prior game engine experience. Development will rely heavily on Claude Code writing engine code.
@@ -27,7 +27,7 @@ Project-level technical and design decisions with context. Per-change decisions 
 2. Godot 4.x with C# — familiar to some devs, but GDScript has better Godot ecosystem support
 3. Unity with C# — industry standard, heavy for a tile-based game, licensing concerns
 4. Web-based (Phaser/custom) — fastest to prototype, harder to ship on Steam
-**Decision:** Godot 4.x with GDScript, pending validation in Spike 1.
+**Decision:** Godot 4.x with GDScript, confirmed.
 **Reasoning:** Free and open source. Excellent 2D support. GDScript is approachable for a generalist programmer. Clean Steam export pipeline. Strong community and documentation. The unknown is whether Claude Code can write GDScript productively — Spike 1 will answer this.
 **Risk:** If Claude Code struggles with GDScript (poor code quality, constant errors, slow iteration), will reconsider Godot with C# or a different engine. Decision point: end of Spike 1.
 

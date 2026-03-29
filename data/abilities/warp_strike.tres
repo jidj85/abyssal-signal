@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="AbilityDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/ability_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"warp_strike"
+display_name = "Warp Strike"
+sanity_cost = 25
+range = 2
+effect = &"warp_strike"
+unlock_threshold = 50

@@ -85,6 +85,61 @@ static func hex_polygon(size: float = HEX_SIZE) -> PackedVector2Array:
 	return points
 
 
+## Returns all hexes within 'radius' steps of 'center'.
+static func hexes_in_range(center: Vector2i, radius: int) -> Array[Vector2i]:
+	var results: Array[Vector2i] = []
+	for q in range(-radius, radius + 1):
+		var r1 := maxi(-radius, -q - radius)
+		var r2 := mini(radius, -q + radius)
+		for r in range(r1, r2 + 1):
+			results.append(center + Vector2i(q, r))
+	return results
+
+
+## Returns the ring of hexes exactly 'radius' steps from 'center'.
+static func hex_ring(center: Vector2i, radius: int) -> Array[Vector2i]:
+	if radius == 0:
+		return [center]
+	var results: Array[Vector2i] = []
+	# Start at one corner and walk the six edges
+	var hex := center + Vector2i(radius, 0)
+	var directions := [
+		Vector2i(0, -1), Vector2i(-1, 0), Vector2i(-1, 1),
+		Vector2i(0, 1), Vector2i(1, 0), Vector2i(1, -1),
+	]
+	for d in directions:
+		for _i in radius:
+			results.append(hex)
+			hex += d
+	return results
+
+
+## BFS shortest path from 'from' to 'to', avoiding hexes not in valid_hexes and hexes in blocked.
+## Returns array of positions from start to end (inclusive), or empty array if no path.
+static func bfs_path(from: Vector2i, to: Vector2i, valid_hexes: Dictionary, blocked: Dictionary = {}) -> Array[Vector2i]:
+	if from == to:
+		return [from]
+	var frontier: Array[Vector2i] = [from]
+	var came_from: Dictionary = {from: from}
+	while frontier.size() > 0:
+		var current: Vector2i = frontier.pop_front()
+		if current == to:
+			# Reconstruct path
+			var path: Array[Vector2i] = []
+			var c: Vector2i = to
+			while c != from:
+				path.append(c)
+				c = came_from[c] as Vector2i
+			path.append(from)
+			path.reverse()
+			return path
+		for neighbor in hex_neighbors(current):
+			if valid_hexes.has(neighbor) and not came_from.has(neighbor) and not blocked.has(neighbor):
+				came_from[neighbor] = current
+				frontier.append(neighbor)
+	return []
+
+
 ## Simple greedy step toward target — returns the neighbor of 'from' closest to 'to'.
 ## Returns 'from' if already at target or no valid step exists.
 static func step_toward(from: Vector2i, to: Vector2i, valid_hexes: Dictionary) -> Vector2i:

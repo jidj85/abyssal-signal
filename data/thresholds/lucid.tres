@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="SanityThresholdDef" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/resources/sanity_threshold_def.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+id = &"lucid"
+min_sanity = 51
+max_sanity = 100
+telegraph_mode = &"exact"
+corrupted_tiles_active = false
+available_abilities = [&"eldritch_step", &"glimpse"]

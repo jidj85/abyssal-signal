@@ -1,0 +1,36 @@
+schema: spec-driven
+
+context: |
+  Abyssal Signal — Hoplite-scale cosmic horror roguelike. Solo investigator on small hex grids,
+  turn-based, deterministic enemy behaviors, 10-15 minute runs.
+  Engine: Godot 4 / GDScript. Target: Steam (desktop).
+  Core mechanic: spending sanity grants power but degrades battlefield information.
+  Solo dev, 8 hours/week, agentic development via Claude Code + OpenSpec.
+  Hex grid uses axial coordinates (q, r), ~7 radius.
+  Turn loop: player input → resolve → enemy AI → resolve → check win/loss → next turn.
+  Entity data (enemies, abilities, items) is data-driven (JSON/Resource files).
+  Sanity thresholds are config-driven: each threshold defines visibility rules, tile types, ability unlocks.
+  v1.0 scope ceiling: 1 character, 5-8 enemy types, 3-5 abilities per run, 3 sanity thresholds, 1 tileset.
+  No meta-progression in v1. No save systems, Steam integration, or custom art until core loop is proven fun.
+
+rules:
+  proposal:
+    - Check the v1.0 scope ceiling — reject features outside: 1 character, 5-8 enemies, 3-5 abilities, 3 sanity thresholds, 1 tileset
+    - No meta-progression, save systems, or Steam integration until core loop is proven
+    - Include a "Non-goals" section to explicitly exclude scope creep
+    - Every feature must justify its complexity given solo dev, 8 hrs/week constraint
+  specs:
+    - Reference hex grid axial coordinates (q, r) for all spatial systems
+    - Map every requirement to testable acceptance scenarios
+    - Entity data must be data-driven (Resource files or JSON), never hardcoded
+    - Sanity threshold effects must be config-driven
+  design:
+    - Include the turn-loop phase where the system executes (player input, resolve, enemy AI, etc.)
+    - Show signal/event flow for cross-system communication
+    - Include an ASCII diagram for non-trivial architectures
+    - Reference GDScript patterns: signals, exported vars, Resource-based data
+  tasks:
+    - Tasks should be ordered so foundational pieces (data resources, core scripts) come before dependent logic
+    - Each task should be completable in a single focused session (~2 hours)
+    - Prefer colored shapes and placeholder sprites — no custom art tasks
+    - Specify which scripts and scenes are affected
